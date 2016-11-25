@@ -3,13 +3,11 @@
  */
 var express = require('express');
 var router = express.Router();
-var cheerio=require('cheerio');
-
+var cheerio = require('cheerio');
 
 /* GET home page. */
-var token="CAKEPHP=49af4b190c1c42e9f52ca659f077522d";
+var token="CAKEPHP=e3181936f42dbefd62876d7194cef111";
 var url='http://localhost:8888/openemis-school/Students/search';
-
 
 var getdataF=require('../config/test_request');
 router.get('/list', function(req, res, next) {
@@ -31,12 +29,8 @@ router.get('/list', function(req, res, next) {
             });
             result.push(tmpStudent);
         });
-        res.send({result:result});
+        res.send({students:result});
     });
-
-    /*res.send({
-       student: "list"
-    });*/
 });
 
 module.exports = router;
