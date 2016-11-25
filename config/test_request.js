@@ -6,14 +6,14 @@ var fs = require('fs');
 var cheerio = require('cheerio');
 
 var options = {
-    url: 'http://localhost:8888/openemis-school/Classes',
+    url: 'http://localhost/openemis-school/Classes',
     headers: {
-        'Host': 'localhost:8888',
+        'Host': 'localhost',
         'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:50.0) Gecko/20100101 Firefox/50.0",
         'Accept': "text/html, */*; q=0.01",
         'Accept-Language': "en-US,en;q=0.5",
         'Accept-Encoding': "gzip, deflate",
-        'Referer': "http://localhost:8888/openemis-school/Dashboard",
+        'Referer': "http://localhost/openemis-school/Dashboard",
         'Cookie': "CAKEPHP=e3181936f42dbefd62876d7194cef111",
         'Connection': "keep-alive"
     }
@@ -23,12 +23,12 @@ function fetch_data(url, token, callback) {
     var options= {
         url: url,
         headers: {
-            'Host': 'localhost:8888',
+            'Host': 'localhost',
             'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:50.0) Gecko/20100101 Firefox/50.0",
             'Accept': "text/html, */*; q=0.01",
             'Accept-Language': "en-US,en;q=0.5",
             'Accept-Encoding': "gzip, deflate",
-            'Referer': "http://localhost:8888/openemis-school/Dashboard",
+            'Referer': "http://localhost/openemis-school/Dashboard",
             'Cookie': token,
             'Connection': "keep-alive"
         }
