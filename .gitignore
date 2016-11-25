@@ -48,3 +48,7 @@ jspm_packages
 
 #test file in local
 test.js
+
+
+# .idea dir
+.idea
