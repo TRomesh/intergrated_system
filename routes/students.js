@@ -6,8 +6,8 @@ var router = express.Router();
 var cheerio = require('cheerio');
 
 /* GET home page. */
-var token="CAKEPHP=e3181936f42dbefd62876d7194cef111";
-var url='http://localhost:8888/openemis-school/Students/search';
+var token="CAKEPHP=mggvncrkbv3jhc06oha1u17th4";
+var url='http://localhost/openemis-school/Students/search';
 
 var getdataF=require('../config/test_request');
 router.get('/list', function(req, res, next) {
