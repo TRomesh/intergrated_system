@@ -52,3 +52,4 @@ test.js
 
 # .idea dir
 .idea
+/node_modules/

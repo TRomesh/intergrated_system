@@ -2,67 +2,87 @@
  * Created by magic_000 on 26/11/2016.
  */
 var rp = require('request-promise');
+var request= require('request');
 
-var option = {
-    method: "POST",
-    url: 'http://localhost/openemis-school/',
-    header: {
-        'Host': 'localhost',
-        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0",
-        'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,*!/!*;q=0.8",
-        'Accept-Language': "en-US,en;q=0.5",
-        'Accept-Encoding': "gzip, deflate",
-        'Referer': "http://localhost/openemis-school/",
-        "Cookie": "io=TFhAiThLoLPWDg2bAAAE; CAKEPHP=79k4qp511anvhgu6q0auufh9a2",
+// this.getTokenEmis('admin', '12345678', function (res) {
+//     console.log(res);
+// });
 
-        "Upgrade-Insecure-Requests":"1",
+module.exports.getTokenEmis = function (username, password, callback) {
+    var option = {
+        method: "POST",
+        url: 'http://localhost:8888/openemis-school/',
+        headers: {
+            'Host': 'localhost:8888',
+            'Connection': "keep-alive"
+        },
+        form: {
+            "_method": "POST",
+            "data[SecurityUser][username]": username,
+            "data[SecurityUser][password]": password,
+            "submit": "login"
+        }
+    };
 
-
-        'Connection': "keep-alive"
-    },
-    form: {
-        "_method": "POST",
-        "data[SecurityUser][username]": "admin",
-        "data[SecurityUser][password]": "12345678",
-        "submit": "login"
-    },
-    resolveWithFullResponse: true,
-    //JSON: true
+    request(option, function (err, response, body) {
+        if (err)
+            console.log(err);
+        var token = response.headers['set-cookie'][0].split(";")[0];
+        callback(token);
+    });
 };
 
 
-function _getToken() {
-    return new Promise(function (resolve, reject) {
-        rp(option).then(function (res) {
-            resolve(res.headers['set-cookie'][0].split("; ")[0]);
-            //console.log(res.header);
+// this.getTokenSis('admin', '12345678a@', function (token) {
+//    console.log(token);
+// });
+module.exports.getTokenSis = function(username, password, callback) {
+    var opts = {
+        method: 'POST',
+        url: 'http://localhost:8888/opensis/index.php',
+        headers: {
+            'Host': 'localhost:8888',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:50.0) Gecko/20100101 Firefox/50.0',
+            'Connection': 'keep-alive'
+        },
+        form: {
+            'USERNAME': username,
+            'PASSWORD': password
+        },
+        resolveWithFullResponse: true
+    };
 
-        }, function (err) {
-            reject(err);
-        });
+    request(opts, function (err, res, body) {
+        if (err)
+            console.log("gettoken 52: " + err);
+        var token = res.headers['set-cookie'][0].split(';')[0];
+
+        callback(token);
+    })
+
+};
+
+// this.getTokenMoodle('admin', '12345', function (token) {
+//     console.log(token)
+// });
+module.exports.getTokenMoodle = function (username, password, callback) {
+    var opts = {
+        method: 'POST',
+        url: 'http://localhost:8888/moodle27/login/index.php',
+        headers: {
+            'Host': "localhost:8888",
+            'Connection': 'keep-alive',
+        },
+        form: {
+            'username' : username,
+            'password' : password
+        }
+    };
+
+    request(opts, function (err, res, body) {
+        if (err)
+            console.log(err);
+        var token = res.headers['set-cookie'][1].split(';')[0];
+        callback(token);
     });
-}
-
-
-var resPromise = rp(option);
-
-resPromise.then(function (res) {
-    //var tmp = res.headers['set-cookie'][0].split("; ")[0];
-    console.log("resolve + 53")
-    console.log(JSON.stringify(res));
-
-    //console.log(res.headers['set-cookie'][0].split("; ")[0]);
-}, function (err) {
-    var headers=err.response.headers['set-cookie'];
-    //console.log("reject 59");
-
-    for(var i in headers){
-        console.log(headers[i]);
-    }
-});
-
-
-
-
-module.exports = _getToken;
-
+};
