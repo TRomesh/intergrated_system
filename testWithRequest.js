@@ -30,6 +30,8 @@ var option = {
     //resolveWithFullResponse: true,
     //JSON: true
 };
+
+
 request(option, function (err, response, body) {
     if(err){
         console.log("Có lỗi");

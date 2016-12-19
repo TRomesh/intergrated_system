@@ -10,10 +10,13 @@ var bodyParser = require('body-parser');
 var session=require('express-session');
 
 var passport=require('passport');
+var strategy= require('passport-local').Strategy;
 
+
+//setup routing
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var login= require('./routes/login');
 
 /*var emis_students = require('./routes/students');
 var emis_classes = require('./routes/classes');*/
@@ -63,8 +66,9 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/students', emis_students);
-app.use('/classes', emis_classes);
+app.use('/login', login);
+/*app.use('/students', emis_students);
+app.use('/classes', emis_classes);*/
 
 
 // catch 404 and forward to error handler
