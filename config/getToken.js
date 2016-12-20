@@ -4,6 +4,8 @@ var request= require('request');
 //     console.log(res);
 // });
 
+
+//callback (token)
 module.exports.getTokenEmis = function (username, password, callback) {
     var option = {
         method: "POST",
@@ -33,6 +35,8 @@ module.exports.getTokenEmis = function (username, password, callback) {
 // this.getTokenSis('admin', '12345678a@', function (token) {
 //    console.log(token);
 // });
+
+//callback token
 module.exports.getTokenSis = function(username, password, callback) {
     var opts = {
         method: 'POST',
