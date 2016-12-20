@@ -18,6 +18,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var login= require('./routes/login');
 var course = require('./routes/course');
+var test = require('./routes/test');
 
 /*var emis_students = require('./routes/students');
 var emis_classes = require('./routes/classes');*/
@@ -56,6 +57,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/course', course);
+app.use('/test', test);
 
 
 /*app.use('/students', emis_students);
