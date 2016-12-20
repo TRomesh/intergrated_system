@@ -60,7 +60,7 @@ router.post('/', function(req, res, next) {
                                     console.log(user);
                                 }, function (err) {
                                     console.log(err);
-                                })
+                                });
 
                                 return res.send(info);
                             })

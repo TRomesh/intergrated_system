@@ -8,7 +8,9 @@ mongoose.Promise=global.Promise;
 
 var UserSchema= mongoose.Schema({
     username: {
-        type: String
+        type: String,
+        unique: true,
+        index: true
     },
     password: {
         type: String
@@ -24,7 +26,10 @@ var UserSchema= mongoose.Schema({
     },
     token_moodle:{
         type: String
-    }
+    },
+    emis_id: Number,
+    sis_id: Number,
+    moodle_id: Number
 });
 
 var user= mongoose.model("Users", UserSchema);
@@ -69,18 +74,5 @@ var createUser = function (newUser) {
     })
 };
 
-var getTokenbyUserName = function (username) {
-    return new Promise(function (resolve, reject) {
-        user.findUserByUsername(username).then(function (user) {
-            if (user.token != '') {
-                resolve(user.token);
-            }
-        }, function (err) {
-            reject(err);
-        })
-    })
-};
-
 module.exports.findUserByUsername=findUserByUsername;
 module.exports.craeteUser = createUser;
-module.exports.getTokenbyUsername = getTokenbyUserName;

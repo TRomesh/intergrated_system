@@ -4,13 +4,18 @@ var request= require('request');
 //     console.log(res);
 // });
 
+
+//callback (token)
 module.exports.getTokenEmis = function (username, password, callback) {
     var option = {
         method: "POST",
         url: 'http://localhost:8888/openemis-school/',
         headers: {
             'Host': 'localhost:8888',
-            'Connection': "keep-alive"
+            'Cookie': 'CAKEPHP=9ac869cbe91418c3fc1785cf88287423',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1'
+
         },
         form: {
             "_method": "POST",
@@ -24,7 +29,7 @@ module.exports.getTokenEmis = function (username, password, callback) {
     request(option, function (err, response, body) {
         if (err)
             console.log(err);
-        var token = response.headers['set-cookie'][0].split(";")[0];
+        var token  = response.headers['set-cookie'][1].split(';')[0];
         callback(token);
     });
 };
@@ -33,6 +38,8 @@ module.exports.getTokenEmis = function (username, password, callback) {
 // this.getTokenSis('admin', '12345678a@', function (token) {
 //    console.log(token);
 // });
+
+//callback token
 module.exports.getTokenSis = function(username, password, callback) {
     var opts = {
         method: 'POST',
@@ -68,6 +75,7 @@ module.exports.getTokenMoodle = function (username, password, callback) {
         url: 'http://localhost:8888/moodle27/login/index.php',
         headers: {
             'Host': "localhost:8888",
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:50.0) Gecko/20100101 Firefox/50.0',
             'Connection': 'keep-alive',
         },
         form: {
