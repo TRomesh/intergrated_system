@@ -3,7 +3,7 @@
  */
 var request = require('request');
 
-var createMoodleUser = function (newUser, callback) {
+var createMoodleUser = function () {
 
     var opts = {
         method: 'POST',
@@ -23,14 +23,19 @@ var createMoodleUser = function (newUser, callback) {
             'mform_isexpanded_id_moodle_additional_names':"0",
             'mform_isexpanded_id_moodle_interests':"0",
             'mform_isexpanded_id_moodle_optional':"0",
-            'username': newUser.username,
+            // 'username': newUser.username,
+            'username': 'thanhnk',
             'auth':"manual",
             'suspended':"0",
-            'newpassword': newUser.password,
+            // 'newpassword': newUser.password,
+            'newpassword': '12345@Bc',
             'preference_auth_forcepasswordchange':"0",
-            'firstname': newUser.firstname,
-            'lastname': newUser.lastname,
-            'email': newUser.email,
+            // 'firstname': newUser.firstname,
+            'firstname': 'Thang',
+            // 'lastname': newUser.lastname,
+            'lastname': 'Luu',
+            // 'email': newUser.email,
+            'email': 'thang@gmail.com',
             'maildisplay':"2",
             'mailformat':"1",
             'maildigest':"0",
@@ -44,7 +49,10 @@ var createMoodleUser = function (newUser, callback) {
         }
     };
 
-    request(opts, callback);
+    request(opts, function (err, res, body) {
+        console.log(res);
+    });
 };
 
+createMoodleUser();
 module.exports.createMoodleUser = createMoodleUser;
