@@ -3,13 +3,24 @@
  */
 var getToken=require('./getToken');
 var request=require('request');
+var cheerio=require('cheerio');
+var get_request=require('./get_request');
 
 
 
-function getStudentIdforCreate() {
+function getStudentIdForCreate(callback) {
     require('../model/users').findUserByUsername('admin').then(function (user) {
         var token_emis=user.token_emis;
+        get_request('http://localhost:8888/openemis-school/Students/add', token_emis, function (err, res, body) {
+            var $= cheerio.load(body);
+            var id_student= $('#SecurityUserOpenemisid').val();
+            console.log(id_student);
 
+
+            //todo: emit form to create student
+
+
+        });
 
 
     }, function (err) {
