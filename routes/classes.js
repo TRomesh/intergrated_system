@@ -9,7 +9,7 @@ var cheerio = require('cheerio');
 var token = "CAKEPHP=e3181936f42dbefd62876d7194cef111";
 var url = "http://localhost:8888/openemis-school/Classes";
 
-var getdataF = require('../config/test_request');
+var getdataF = require('../config/get_request');
 router.get('/list', function (req, res, next) {
     var result = [];
     getdataF(url, token, function (err, response, body) {

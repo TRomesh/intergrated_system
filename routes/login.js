@@ -5,10 +5,11 @@ var express = require('express');
 var router = express.Router();
 
 var passport= require('passport');
-
 var strategy= require('passport-local').Strategy;
 
 var users_model= require('../model/users');
+var gettoken = require('../config/getToken');
+
 
 passport.use('local', new strategy(function (username, password, done) {
     users_model.findUserByUsername(username).then(function (user) {
@@ -35,8 +36,8 @@ passport.deserializeUser(function (userid, done) {
    });
 });
 
-
 router.post('/', function(req, res, next) {
+
 
     var passportRes= passport.authenticate('local',  function(err, user, info){
         if(user){
@@ -46,7 +47,25 @@ router.post('/', function(req, res, next) {
                 if(err){
                     return next(err);
                 }else{
-                    return res.send(info);
+                    gettoken.getTokenMoodle(user.username, user.password, function (token_moodle) {
+                        user.token_moodle = token_moodle;
+                        
+                        gettoken.getTokenEmis(user.username, user.password, function (token_emis) {
+                            user.token_emis = token_emis;
+                            
+                            gettoken.getTokenSis(user.username, user.password, function (token_sis) {
+                                user.token_sis = token_sis;
+
+                                user.save().then(function (user) {
+                                    console.log(user);
+                                }, function (err) {
+                                    console.log(err);
+                                })
+
+                                return res.send(info);
+                            })
+                        });
+                    });
                 }
             });
             //res.send(info);
@@ -59,15 +78,9 @@ router.post('/', function(req, res, next) {
 
 });
 
-
 router.get('/', function (req,res, next) {
-
-
     console.log(req.user);
-
-   res.render('login');
+    res.render('login');
 });
-
-
 
 module.exports = router;

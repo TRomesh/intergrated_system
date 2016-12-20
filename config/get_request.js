@@ -2,22 +2,16 @@
  * Created by NarX on 11/25/16.
  */
 var request = require('request');
-var cheerio = require('cheerio');
 
 function fetch_data(url, token, callback) {
     var options= {
         url: url,
         headers: {
-            'Host': 'localhost',
-            'User-Agent': "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0",
+            'Host': 'localhost:8888',
             'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,*!/!*;q=0.8",
-            'Accept-Language': "en-US,en;q=0.5",
-            'Accept-Encoding': "gzip, deflate",
-            'Referer': "http://localhost/openemis-school/",
             'Cookie': token,
             'Connection': "keep-alive",
             "Upgrade-Insecure-Requests":"1"
-
         }
     };
     // callback (err, response, body)

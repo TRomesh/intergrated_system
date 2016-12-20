@@ -1,7 +1,3 @@
-/**
- * Created by magic_000 on 26/11/2016.
- */
-var rp = require('request-promise');
 var request= require('request');
 
 // this.getTokenEmis('admin', '12345678', function (res) {
@@ -23,6 +19,7 @@ module.exports.getTokenEmis = function (username, password, callback) {
             "submit": "login"
         }
     };
+
 
     request(option, function (err, response, body) {
         if (err)

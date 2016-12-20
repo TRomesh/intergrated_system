@@ -4,11 +4,7 @@
 var mongoose= require('mongoose');
 mongoose.Promise=global.Promise;
 
-var uri='mongodb://localhost:27017/smart_school';
-
 //mongoose.connect(uri);
-
-
 
 var UserSchema= mongoose.Schema({
     username: {
@@ -33,10 +29,7 @@ var UserSchema= mongoose.Schema({
 
 var user= mongoose.model("Users", UserSchema);
 
-
-
 module.exports=user;
-
 
 var findUserByUsername=function (username) {
     return new Promise(function (resolve, reject) {
@@ -59,4 +52,35 @@ var findUserByUsername=function (username) {
     });
 };
 
+
+var createUser = function (newUser) {
+    return new Promise(function (resolve, reject) {
+        user.findUserByUsername(newUser.username).then(function (user) {
+            reject({
+                msg: "username is not availabe"
+            });
+        }, function (err) {
+            newUser.save().then(function (user) {
+                resolve(user);
+            }, function (err) {
+                reject(err);
+            })
+        })
+    })
+};
+
+var getTokenbyUserName = function (username) {
+    return new Promise(function (resolve, reject) {
+        user.findUserByUsername(username).then(function (user) {
+            if (user.token != '') {
+                resolve(user.token);
+            }
+        }, function (err) {
+            reject(err);
+        })
+    })
+};
+
 module.exports.findUserByUsername=findUserByUsername;
+module.exports.craeteUser = createUser;
+module.exports.getTokenbyUsername = getTokenbyUserName;

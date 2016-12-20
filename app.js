@@ -17,20 +17,16 @@ var strategy= require('passport-local').Strategy;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var login= require('./routes/login');
+var course = require('./routes/course');
 
 /*var emis_students = require('./routes/students');
 var emis_classes = require('./routes/classes');*/
 
-
-
 var mongoose= require('mongoose');
 mongoose.Promise=global.Promise;
-mongoose.connect("mongodb://localhost:27017/smart_school");
 
-
-
-
-
+var uri = "mongodb://root:9235@ds139428.mlab.com:39428/integrated_system";
+mongoose.connect(uri);
 
 var app = express();
 
@@ -56,17 +52,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-
-
-
-
-
-
 app.use('/', routes);
 app.use('/users', users);
 app.use('/login', login);
+app.use('/course', course);
+
+
 /*app.use('/students', emis_students);
 app.use('/classes', emis_classes);*/
 
