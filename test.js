@@ -8,7 +8,7 @@
 var getRequest=require('./config/get_request');
 
 
-require('./config/getToken').getTokenEmis('admin', '12345678', function (token) {
+require('./config/getToken').getTokenEmis('admin', '12345@Bc', function (token) {
     console.log(token);
     getRequest("http://localhost:8888/openemis-school/Dashboard", token, function (err, res, body) {
        console.log(body);

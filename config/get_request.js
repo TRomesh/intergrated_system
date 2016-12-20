@@ -8,7 +8,6 @@ function fetch_data(url, token, callback) {
         url: url,
         headers: {
             'Host': 'localhost:8888',
-            'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,*!/!*;q=0.8",
             'Cookie': token,
             'Connection': "keep-alive",
             "Upgrade-Insecure-Requests":"1"
