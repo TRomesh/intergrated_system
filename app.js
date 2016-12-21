@@ -20,6 +20,7 @@ var login= require('./routes/login');
 var course = require('./routes/course');
 var test = require('./routes/test');
 var add_user = require('./routes/create_user');
+var school_info = require('./routes/school_info');
 
 /*var emis_students = require('./routes/students');
 var emis_classes = require('./routes/classes');*/
@@ -60,7 +61,7 @@ app.use('/login', login);
 app.use('/course', course);
 app.use('/test', test);
 app.use('/student', add_user);
-
+app.use('/school', school_info);
 
 /*app.use('/students', emis_students);
 app.use('/classes', emis_classes);*/

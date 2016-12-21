@@ -1,25 +1,25 @@
 <html>
 <head>
-    <title>Add new Teacher</title>
+    <title>School Edit Infomation</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <!-- Bootstrap Core CSS -->
-<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
 
 <!-- MetisMenu CSS -->
-<link href="stylesheets/metisMenu.min.css" rel="stylesheet">
+<link href="/stylesheets/metisMenu.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="stylesheets/sb-admin-2.css" rel="stylesheet">
+<link href="/stylesheets/sb-admin-2.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- DataTables CSS -->
-<link href="stylesheets/dataTables.bootstrap.css" rel="stylesheet">
+<link href="/stylesheets/dataTables.bootstrap.css" rel="stylesheet">
 
 <!-- DataTables Responsive CSS -->
-<link href="stylesheets/dataTables.responsive.css" rel="stylesheet">
+<link href="/stylesheets/dataTables.responsive.css" rel="stylesheet">
 <body>
 <div id="wrapper">
 
@@ -62,7 +62,7 @@
                 <ul class="nav" id="side-menu">
 
                     <li>
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> UET</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Teachers<span class="fa arrow"></span></a>
@@ -112,52 +112,101 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Teacher
-                        <small>Add</small>
+                    <h1 class="page-header">School Infomation
+                        <% if (school_info._path == "school_show") { %>
+                        <a href="/school/edit"><small>Edit</small></a>
+                        <% } else { %>
+                        <small>Edit</small>
+                        <% } %>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
+                    <% if (school_info._path == "school_show") { %>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="dashboard-datafield">Name</td>
+                                <td class="data"><%= school_info.name %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Code</td>
+                                <td class="data"><%= school_info.code %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Address</td>
+                                <td class="data"><%= school_info.address %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Postal Code</td>
+                                <td class="data"><%= school_info.postalcode %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Phone</td>
+                                <td class="data"><%= school_info.phone %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Email</td>
+                                <td class="data"><%= school_info.email %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Website</td>
+                                <td class="data"><%= school_info.website %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Date Opened</td>
+                                <td class="data"><%= school_info.opendate %></td>
+                            </tr>
+                            <tr>
+                                <td class="dashboard-datafield">Date Closed</td>
+                                <td class="data"><%= school_info.closedate %></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    <% } else { %>
+                    <form action="/school/edit" method="post">
                         <div class="form-group">
-                            <label>First Name</label>
-                            <input class="form-control" name="txtfirstname" placeholder="Please Enter First Name"/>
+                            <label>Name</label>
+                            <input class="form-control" name="schoolname" value="<%= school_info.name %>"
+                                   placeholder="Please Enter School Name"/>
                         </div>
                         <div class="form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" name="txtlastname" placeholder="Please Enter Last Name"/>
+                            <label>Code</label>
+                            <input class="form-control" value="<%= school_info.code %>" name="code"/>
                         </div>
                         <div class="form-group">
-                            <label>Birth Day</label>
-                            <input type="date" class="form-control" name="txtdob" placeholder=""/>
+                            <label>Address</label>
+                            <input type="text" class="form-control" name="address" value="<%= school_info.address %>"
+                                   placeholder=""/>
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" name="txtemail" placeholder="Please Enter Your Email"/>
+                            <label>Phone</label>
+                            <input class="form-control" value="<%= school_info.phone %>" name="phone"/>
                         </div>
                         <div class="form-group">
-                            <label>User Name</label>
-                            <input class="form-control" type="text" name="txtusername" placeholder="Please Enter UserName">
+                            <label>Post Code</label>
+                            <input class="form-control" type="text" value="<%= school_info.postalcode %>"
+                                   name="postcode">
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
-                            <input class="form-control" type="password" name="txtpassword" placeholder="Please Enter Password"/>
+                            <label>Website</label>
+                            <input class="form-control" type="text" name="website" value="<%= school_info.website %>"
+                                   placeholder="website"/>
                         </div>
                         <div class="form-group">
-                            <label>Gender</label>
-                            <label class="radio-inline">
-                                <input name="gender" value="1" checked="" type="radio">Male
-                            </label>
-                            <label class="radio-inline">
-                                <input name="gender" value="2" type="radio">Female
-                            </label>
+                            <label>Date open</label>
+                            <input class="form-control" type="datetime" value="<%= school_info.opendate %>"
+                                   name="dateopen"/>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" name="txtrole" value="teacher" style="display: none"/>
+                            <label>Date Close</label>
+                            <input class="form-control" type="datetime" value="<%= school_info.closedate %>"
+                                   name="dateclose"/>
                         </div>
-                        <button type="submit" class="btn btn-default">Add Teacher </button>
+                        <button type="submit"  class="btn btn-default">Update Info</button>
                         <button type="reset" class="btn btn-default">Reset</button>
                     </form>
+                    <% } %>
                 </div>
             </div>
             <!-- /.row -->
@@ -168,21 +217,22 @@
 
 </div>
 
+
 <!-- jQuery -->
-<script src="javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="javascripts/metisMenu.min.js"></script>
+<script src="/javascripts/metisMenu.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="javascripts/sb-admin-2.js"></script>
+<script src="/javascripts/sb-admin-2.js"></script>
 
 <!-- DataTables JavaScript -->
-<script src="javascripts/jquery.dataTables.min.js"></script>
-<script src="javascripts/dataTables.bootstrap.min.js"></script>
+<script src="/javascripts/jquery.dataTables.min.js"></script>
+<script src="/javascripts/dataTables.bootstrap.min.js"></script>
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
@@ -191,6 +241,7 @@
             responsive: true
         });
     });
+
 </script>
 </body>
 

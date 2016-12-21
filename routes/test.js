@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
-    res.render('teacher_add');
+    res.render('school_edit');
 });
 
 module.exports = router;

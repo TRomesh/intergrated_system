@@ -1,11 +1,10 @@
 var request= require('request');
 
-// this.getTokenEmis('admin', '12345678', function (res) {
-//     console.log(res);
-// });
 
 
 //callback (token)
+
+
 module.exports.getTokenEmis = function (username, password, callback) {
     var option = {
         method: "POST",
@@ -33,6 +32,10 @@ module.exports.getTokenEmis = function (username, password, callback) {
         callback(token);
     });
 };
+
+// this.getTokenEmis('admin', '12345678', function (res) {
+//     console.log(res);
+// });
 
 
 // this.getTokenSis('admin', '12345678a@', function (token) {
@@ -87,7 +90,7 @@ module.exports.getTokenMoodle = function (username, password, callback) {
     request(opts, function (err, res, body) {
         if (err)
             console.log(err);
-        var token = res.headers['set-cookie'][1].split(';')[0];
-        callback(token);
+//        var token = res.headers['set-cookie'][1].split(';')[0];
+      //  callback(token);
     });
 };

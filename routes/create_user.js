@@ -10,7 +10,7 @@ router.get('/add', function (req, res, next) {
     }
 });
 
-router.post('/add', function (req, res, next) {
+router.put('/add', function (req, res, next) {
     if (req.user._type == "admin") {
         var newUser = {
             username: req.username,
