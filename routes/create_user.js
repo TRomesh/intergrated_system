@@ -12,16 +12,20 @@ router.get('/add', function (req, res, next) {
 
 router.post('/add', function (req, res, next) {
     if (req.user._type == "admin") {
-        var newUser = {
-            username: req.username,
-            password: req.password,
-            firstname: req.firstname,
-            lastname: req.lastname,
-            email: req.email
-        }
 
-        require('../config/moodle_user').createMoodleUser(newUser, function (err, res, body) {
-            console.log(res.headers);
+        var newUser = {
+            username: req.body.username,
+            password: req.body.password,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email
+        };
+
+        require('../config/moodle_user').createMoodleUser(newUser, req.user.token_moodle, function (err, response, body) {
+            // console.log(res.body);
+            console.log(req.user.token_moodle);
+            console.log(body);
+            res.redirect('/');
         });
     } else {
         res.render('error');
