@@ -17,8 +17,8 @@
 
  });*/
 
-<<<<<<< HEAD
-=======
+/*<<<<<<< HEAD
+=======*/
 // getRequest('http://localhost:8888/moodle27/', 'MoodleSessionm27=1fbbf41fbb7d2f95421aefe501e7683a', function (err, res, body) {
 //     console.log(body);
 // })
@@ -26,7 +26,7 @@
  'CAKEPHP=k8aipdbjklasc1auoqo3kr85m3', function (err, res, body) {
  console.log(body);
  })*/
->>>>>>> fe05bd1aa98d62178901cd865743a8f0826518f9
+//>>>>>>> fe05bd1aa98d62178901cd865743a8f0826518f9
 
 /*var token_admin = "c196c18bed37d31bcea0b8829557e402";
 var request = require('request');
