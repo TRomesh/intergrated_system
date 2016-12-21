@@ -65,7 +65,7 @@
                         <a href="#"><i class="fa fa-dashboard fa-fw"></i> </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Teachers<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-briefcase fa-fw"></i> Teachers<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">List Teachers</a>
@@ -77,7 +77,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-cube fa-fw"></i> Students<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-mortar-board fa-fw"></i> Students<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">List Students</a>
@@ -89,7 +89,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-users fa-fw"></i> Courses<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-columns fa-fw"></i> Courses<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">List Courses</a>
@@ -121,27 +121,27 @@
                     <form action="/student/add" method="POST">
                         <div class="form-group">
                             <label>First Name</label>
-                            <input class="form-control" name="txtfirstname" placeholder="Please Enter First Name"/>
+                            <input class="form-control" name="firstname" placeholder="Please Enter First Name"/>
                         </div>
                         <div class="form-group">
                             <label>Last Name</label>
-                            <input class="form-control" name="txtlastname" placeholder="Please Enter Last Name"/>
+                            <input class="form-control" name="lastname" placeholder="Please Enter Last Name"/>
                         </div>
                         <div class="form-group">
                             <label>Birth Day</label>
-                            <input type="datetime" class="form-control" name="txtdob" placeholder=""/>
+                            <input type="datetime" class="form-control" name="dob" placeholder=""/>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="txtemail" placeholder="Please Enter Your Email"/>
+                            <input type="email" class="form-control" name="email" placeholder="Please Enter Your Email"/>
                         </div>
                         <div class="form-group">
                             <label>User Name</label>
-                            <input class="form-control" type="text" name="txtusername" placeholder="Please Enter UserName">
+                            <input class="form-control" type="text" name="username" placeholder="Please Enter UserName">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input class="form-control" type="password" name="txtpassword" placeholder="Please Enter Password"/>
+                            <input class="form-control" type="password" name="password" placeholder="Please Enter Password"/>
                         </div>
                         <div class="form-group">
                             <label>Gender</label>
@@ -153,7 +153,7 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" name="txtrole" value="student" style="display: none"/>
+                            <input class="form-control" name="role" value="student" style="display: none"/>
                         </div>
                         <button type="submit" class="btn btn-default">Add Student</button>
                         <button type="reset" class="btn btn-default">Reset</button>

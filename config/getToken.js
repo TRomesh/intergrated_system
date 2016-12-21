@@ -1,5 +1,4 @@
-var request= require('request');
-
+var request = require('request');
 
 
 //callback (token)
@@ -28,7 +27,7 @@ module.exports.getTokenEmis = function (username, password, callback) {
     request(option, function (err, response, body) {
         if (err)
             console.log(err);
-        var token  = response.headers['set-cookie'][1].split(';')[0];
+        var token = response.headers['set-cookie'][1].split(';')[0];
         callback(token);
     });
 };
@@ -43,7 +42,7 @@ module.exports.getTokenEmis = function (username, password, callback) {
 // });
 
 //callback token
-module.exports.getTokenSis = function(username, password, callback) {
+module.exports.getTokenSis = function (username, password, callback) {
     var opts = {
         method: 'POST',
         url: 'http://localhost:8888/opensis/index.php',
@@ -82,15 +81,22 @@ module.exports.getTokenMoodle = function (username, password, callback) {
             'Connection': 'keep-alive',
         },
         form: {
-            'username' : username,
-            'password' : password
+            'username': username,
+            'password': password
         }
     };
 
     request(opts, function (err, res, body) {
         if (err)
             console.log(err);
-//        var token = res.headers['set-cookie'][1].split(';')[0];
-      //  callback(token);
+
+        var token = res.headers['set-cookie'][1].split(';')[0];
+        callback(token);
+
     });
 };
+
+
+/*this.getTokenEmis('admin', '12345678', function (res) {
+ console.log(res);
+ });*/

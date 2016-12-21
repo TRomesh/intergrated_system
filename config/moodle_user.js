@@ -1,58 +1,148 @@
-/**
- * Created by NarX on 12/20/16.
- */
-var request = require('request');
+var moodle_client = require('moodle-client');
 
-var createMoodleUser = function () {
-
-    var opts = {
-        method: 'POST',
-        url: 'http://localhost:8888/moodle27/user/editadvanced.php',
-        headers: {
-            'Host': 'localhost:8888',
-            'Referer': 'http://localhost:8888/moodle27/user/editadvanced.php',
-            'Cookie': 'MoodleSessionm27=284c7de1367d529dcfb42365af2f54b9; connect.sid=s%3AX7mL3WxKztfNqLYkopECT8Mqdbx5KzY-.y8Ldm25Byn8VI39VePtsjjFoQBnodqZIVpki0edb0c4; PHPSESSID=d3c243cd6bada82e6a7d48a5feef32d9; CAKEPHP=9ac869cbe91418c3fc1785cf88287423',
-            'Connection': 'keep-alive'
-        },
-        form: {
-            'course': '1',
-            'sesskey': 'Nh0Emzujep',
-            '_qf__user_editadvanced_form': "1",
-            'mform_isexpanded_id_moodle':"1",
-            'mform_isexpanded_id_moodle_picture':"0",
-            'mform_isexpanded_id_moodle_additional_names':"0",
-            'mform_isexpanded_id_moodle_interests':"0",
-            'mform_isexpanded_id_moodle_optional':"0",
-            // 'username': newUser.username,
-            'username': 'thanhnk',
-            'auth':"manual",
-            'suspended':"0",
-            // 'newpassword': newUser.password,
-            'newpassword': '12345@Bc',
-            'preference_auth_forcepasswordchange':"0",
-            // 'firstname': newUser.firstname,
-            'firstname': 'Thang',
-            // 'lastname': newUser.lastname,
-            'lastname': 'Luu',
-            // 'email': newUser.email,
-            'email': 'thang@gmail.com',
-            'maildisplay':"2",
-            'mailformat':"1",
-            'maildigest':"0",
-            'autosubscribe':"1",
-            'trackforums':"0",
-            'timezone':"99",
-            'lang':"en",
-            'description_editor[format]':"1",
-            'imagefile':"302378441",
-            'submitbutton':"Create+user"
-        }
-    };
-
-    request(opts, function (err, res, body) {
-        console.log(res);
+function create_user(username, password, firstname, lastname, email, timezone, callback) {
+    moodle_client.init({
+        wwwroot: "http://localhost:8888/moodle32",
+        token: 'c6e0313a8f24ad2b62e05383c14a3a28'
+    }).then(function (client) {
+        client.call({
+            wsfunction: "core_user_create_users",
+            method: "POST",
+            args: {
+                users: [/*{
+                    username: username,
+                    password: password,
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    timezone: timezone
+                }*/
+                    {  username: 'testusername2',
+                        password : 'testpassword2',
+                        firstname : 'testfirstname2',
+                        lastname : 'testlastname2',
+                        email : 'testemail2@moodle.com',
+                        timezone : 'Pacific/Port_Moresby'
+                    }]
+            }
+        }).then(function (res) {
+            callback(res);
+        }).catch(function (err) {
+            console.log("line 24")
+        })
+    }).catch(function (err) {
+        console.log('line 27');
     });
-};
+}
 
-createMoodleUser();
-module.exports.createMoodleUser = createMoodleUser;
+create_user("sdvdfvf", "dsvf@Bc", "Phu", "Hong", "mail@mail.com", "GMT+7", function (data) {
+    console.log(data);
+});
+
+
+function create_course(fullname, shortname, callback) {
+    moodle_client.init({
+        wwwroot: "http://localhost:8888/moodle32",
+        token: 'e5971b30a7e8d935d04b5cff02ef4152'
+    }).then(function (client) {
+        client.call({
+            wsfunction: "core_course_create_courses",
+            method: "POST",
+            args: {
+                courses: [{
+                    fullname: fullname,
+                    shortname: shortname,
+                    categoryid: 2,
+                    summaryformat: 1,
+                    showgrades: 0,
+                    newsitems: 0,
+                    maxbytes: 20971520,
+                    showreports: 0,
+                    groupmode: 0,
+                    groupmodeforce: 0,
+                    defaultgroupingid: 0
+                }]
+            }
+        }).then(function (res) {
+            console.log(res);
+            callback(res);
+        }).catch(function (err) {
+            console.log(res);
+        });
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
+
+function enrollUser(roleid, userid, courseid, callback) {
+    moodle_client.init({
+        wwwroot: "http://localhost:8888/moodle32",
+        token: 'e5971b30a7e8d935d04b5cff02ef4152'
+    }).then(function (client) {
+        client.call({
+            wsfunction: "enrol_manual_enrol_users",
+            method: "POST",
+            enrolments: [
+                {
+                    roleid: roleid,
+                    userid: userid,
+                    courseid: courseid
+                }
+            ]
+
+        }).then(function (res) {
+            callback(res);
+        }).catch(function (err) {
+            callback(err);
+        })
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+function update_user(id, username, password, firstname, lastname, email, timezone, callback) {
+    moodle_client.init({
+        wwwroot: "http://localhost:8888/moodle32",
+        token: 'e5971b30a7e8d935d04b5cff02ef4152'
+    }).then(function (client) {
+        client.call({
+            wsfunction: "enrol_manual_enrol_users",
+            method: "POST",
+            users: [
+                {
+                    id: id,
+                    username: username,
+                    password: password,
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    timezone: timezone,
+                }
+            ]
+        }).then(function (res) {
+            callback(res);
+        }).catch(function (res) {
+            console.log(res);
+        })
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+
+
+/*update_user(1, "thanh", "12345@Bc", "Thanh__", "KHac", 'thanh@thanh.com', "GMT+7", function (res) {
+ console.log(res);
+ });*/
+
+
+/*create_user("phu_vh", "12345@Bc", "Phu", "Hong", "mail@mail.com", "GMT+7", function (data) {
+ console.log(data);
+ });*/
+
+
+
+
+
+module.exports.create_course = create_course;
+module.exports.create_user = create_user;
+
